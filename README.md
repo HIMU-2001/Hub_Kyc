@@ -1,4 +1,4 @@
-```markdown
+
 # Product Comparison App
 
 A simple React application that allows users to view product details and compare multiple products side by side. The application fetches product data from a public API and provides a user-friendly interface for comparison.
@@ -12,7 +12,6 @@ A simple React application that allows users to view product details and compare
 - [API](#api)
 - [Folder Structure](#folder-structure)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
