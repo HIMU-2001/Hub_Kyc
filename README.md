@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+```markdown
+# Product Comparison App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React application that allows users to view product details and compare multiple products side by side. The application fetches product data from a public API and provides a user-friendly interface for comparison.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API](#api)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- View a list of products with details such as title, description, price, brand, and category.
+- Select products to compare them side by side.
+- Responsive design for optimal viewing on various devices.
+- User-friendly interface with navigation between product details and comparison pages.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+- **React**: A JavaScript library for building user interfaces.
+- **Ant Design**: A UI design language and React-based implementation for building rich, interactive user interfaces.
+- **React Router**: For handling routing and navigation within the application.
+- **Axios**: For making HTTP requests to fetch product data from the API.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+To get started with the project, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/product-comparison-app.git
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
+   ```bash
+   cd product-comparison-app
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install the required dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. Open your browser and go to `http://localhost:3000` to view the application.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. On the **Product Details** page, you will see a list of products fetched from the API.
+2. Click the **Compare** button next to any product to add it to the comparison list.
+3. Navigate to the **Compare Products** page to view the selected products side by side.
+4. You can remove products from the comparison list as needed.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API
 
-## Learn More
+The application fetches product data from the following API:
+- **API Endpoint**: [https://dummyjson.com/products](https://dummyjson.com/products)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The API provides a list of products with attributes such as:
+- `id`
+- `title`
+- `description`
+- `price`
+- `brand`
+- `category`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Folder Structure
 
-### Code Splitting
+```
+src/
+|-- components/          # Reusable components (Navbar, Sidebar, ProductTable, etc.)
+|-- pages/               # Page components (ProductDetails, ComparePage)
+|-- App.js               # Main application component
+|-- index.js             # Entry point of the application
+|-- styles.css           # Global styles
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Contributing
 
-### Analyzing the Bundle Size
+Contributions are welcome! If you have suggestions for improvements or new features, please fork the repository and submit a pull request.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Fork the repository.
+2. Create your feature branch:
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m 'Add some feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/YourFeature
+   ```
+5. Open a pull request.
