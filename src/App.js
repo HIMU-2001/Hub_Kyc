@@ -10,50 +10,44 @@ import Sidebar from "./components/Sidebar";
 import ProductDetails from "./pages/ProductDetails";
 import ComparePage from "./pages/ComparePage";
 import ProductModal from "./components/ProductModal";
+import { fetchProducts } from "./api/product";
+import useProductComparison from "./hooks/useProductComparison";
+import LoadingSpinner from "./components/LoadingSpinner";
 import axios from "axios";
+
+
+
 
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
+
   const [collapsed, setCollapsed] = useState(false);
 
+  const {
+    products,
+    selectedProducts,
+    modalVisible,
+    loading,
+    setLoading,
+    setProducts,
+    setModalVisible,
+    handleCompare,
+    handleRemove,
+  } = useProductComparison();
+  
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get("https://dummyjson.com/products");
-        setProducts(data.products);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
+    const getProducts = async () => {
+      setLoading(true);
+      const productList = await fetchProducts();
+      setProducts(productList);
+      setLoading(false);
     };
-    fetchData();
+    getProducts();
   }, []);
 
-
-  const handleCompare = (product) => {
-    if (selectedProducts.some((p) => p.id === product.id)) {
-      toast.warn("This product is already selected for comparison.");
-      return;
-    }
-
-    if (selectedProducts.length >= 4) {
-      toast.warn("You can only compare up to 4 products.");
-      return;
-    }
-
-    setSelectedProducts((prev) => [...prev, product]);
-  };
-
-  const handleRemove = (id) => {
-    setSelectedProducts((prev) => prev.filter((p) => p.id !== id));
-  };
 
   const handleAddMore = () => {
     setModalVisible(true);
@@ -87,12 +81,8 @@ const App = () => {
               }}
             >
               {loading ? (
-                <div style={{ textAlign: "center", padding: "50px" }}>
-                  <Spin size="large" />
-                  <Title level={4} style={{ marginTop: "10px", color: "#555" }}>
-                    Loading products...
-                  </Title>
-                </div>
+                ( <LoadingSpinner /> )
+
               ) : (
                 <Routes>
                   <Route path="/" element={<ProductDetails products={products} onCompare={handleCompare} />} />
