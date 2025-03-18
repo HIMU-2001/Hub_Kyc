@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Layout, Button, Spin, Typography } from "antd";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import the CSS for react-toastify
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import ProductDetails from "./pages/ProductDetails";
@@ -18,13 +20,13 @@ const App = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [collapsed, setCollapsed] = useState(false); // State for sidebar collapse
+  const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get("https://dummyjson.com/products");
-        setProducts(result.data.products);
+        const { data } = await axios.get("https://dummyjson.com/products");
+        setProducts(data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -34,14 +36,23 @@ const App = () => {
     fetchData();
   }, []);
 
+
   const handleCompare = (product) => {
-    if (!selectedProducts.some((p) => p.id === product.id) && selectedProducts.length < 4) {
-      setSelectedProducts([...selectedProducts, product]);
+    if (selectedProducts.some((p) => p.id === product.id)) {
+      toast.warn("This product is already selected for comparison.");
+      return;
     }
+
+    if (selectedProducts.length >= 4) {
+      toast.warn("You can only compare up to 4 products.");
+      return;
+    }
+
+    setSelectedProducts((prev) => [...prev, product]);
   };
 
   const handleRemove = (id) => {
-    setSelectedProducts(selectedProducts.filter((p) => p.id !== id));
+    setSelectedProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
   const handleAddMore = () => {
@@ -55,11 +66,8 @@ const App = () => {
   return (
     <Router>
       <Layout style={{ minHeight: "100vh", background: "#f4f4f4" }}>
-        {/* HEADER */}
         <Navbar />
-
         <Layout>
-          {/* SIDEBAR */}
           <Sider
             width={260}
             collapsed={collapsed}
@@ -68,7 +76,6 @@ const App = () => {
           >
             <Sidebar />
           </Sider>
-
           <Layout style={{ padding: "24px" }}>
             <Content
               style={{
@@ -79,7 +86,6 @@ const App = () => {
                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
               }}
             >
-              {/* LOADING STATE */}
               {loading ? (
                 <div style={{ textAlign: "center", padding: "50px" }}>
                   <Spin size="large" />
@@ -89,10 +95,7 @@ const App = () => {
                 </div>
               ) : (
                 <Routes>
-                  {/* PRODUCT DETAILS PAGE */}
                   <Route path="/" element={<ProductDetails products={products} onCompare={handleCompare} />} />
-
-                  {/* COMPARE PAGE */}
                   <Route
                     path="/compare"
                     element={
@@ -103,7 +106,12 @@ const App = () => {
                             + Add More Products
                           </Button>
                         </div>
-                        <ProductModal visible={modalVisible} onClose={handleCloseModal} products={products} onSelect={handleCompare} />
+                        <ProductModal
+                          visible={modalVisible}
+                          onClose={handleCloseModal}
+                          products={products}
+                          onSelect={handleCompare}
+                        />
                       </>
                     }
                   />
@@ -113,6 +121,7 @@ const App = () => {
           </Layout>
         </Layout>
       </Layout>
+      <ToastContainer /> {/* Add ToastContainer to render the toasts */}
     </Router>
   );
 };

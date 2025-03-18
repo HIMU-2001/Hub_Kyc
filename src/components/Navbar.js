@@ -31,7 +31,7 @@ const Navbar = () => {
     >
       {/* Logo */}
       <div style={{ fontSize: "20px", fontWeight: "bold", color: "#fff" }}>
-      CompareWise
+        CompareWise
       </div>
 
       {/* Navigation Links */}

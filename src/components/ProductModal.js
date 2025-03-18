@@ -13,7 +13,11 @@ const ProductModal = ({ visible, onClose, products, onSelect }) => {
       title: "Price (₹)",
       dataIndex: "price",
       key: "price",
-      render: (price) => <span style={{ color: "#1890ff", fontWeight: "bold" }}>₹{price}</span>,
+      render: (price) => (
+        <span style={{ color: "#1890ff", fontWeight: "bold" }}>
+          ₹{price}
+        </span>
+      ),
     },
     {
       title: "Action",
@@ -30,7 +34,7 @@ const ProductModal = ({ visible, onClose, products, onSelect }) => {
   return (
     <Modal
       title="Add More Products"
-      open={visible}
+      visible={visible}
       onCancel={onClose}
       footer={null}
       width={600}
